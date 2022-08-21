@@ -50,20 +50,38 @@ public class inicio extends JDialog{
                     String email = usuarioTF.getText();
                     String password = String.valueOf(passwordTF.getPassword());
                     System.out.println("boton ok");
-                    bodeguero = getAuthenticationBodeguero(email,password);
-                    if(bodeguero!= null){
+                    user = getAuthenticationBodeguero(email,password);
+                    if(user!= null){
 
-                        JFrame crud2 = new JFrame("BODEGUEROS");
-                        crud2.setContentPane(new panelBodegueros().bodegueros);
-                        crud2.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                        crud2.pack();
-                        crud2.setVisible(true);
+                        JFrame crud1 = new JFrame("BODEGUEROS");
+                        crud1.setContentPane(new panelBodegueros().bodegueros);
+                        crud1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                        crud1.pack();
+                        crud1.setVisible(true);
                         dispose();
                     }else {
                         JOptionPane.showMessageDialog(inicio.this,"Email o Password incorrectos","ERROR",JOptionPane.ERROR_MESSAGE);
                         Limpiar();
                     }
+                }
+                if (modosCB.getSelectedItem().toString()=="ADMINISTRADOR"){
+                    String email = usuarioTF.getText();
+                    String password = String.valueOf(passwordTF.getPassword());
+                    System.out.println("boton ok");
+                    user = getAuthenticationAdministrador(email,password);
+                    if(user!= null){
 
+                        JFrame crud1 = new JFrame("ADMINISTRADOR");
+                        crud1.setContentPane(new panelAdministradores().administradores);
+                        crud1.setSize(600,500);
+                        crud1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                        crud1.pack();
+                        crud1.setVisible(true);
+                        dispose();
+                    }else {
+                        JOptionPane.showMessageDialog(inicio.this,"Email o Password incorrectos","ERROR",JOptionPane.ERROR_MESSAGE);
+                        Limpiar();
+                    }
                 }
 
             }
@@ -111,9 +129,8 @@ public class inicio extends JDialog{
         return user;
     }
 
-    public Bodeguero bodeguero;
-    private Bodeguero getAuthenticationBodeguero(String email,String password){
-        Bodeguero bodeguero = null;
+    private User getAuthenticationBodeguero(String email,String password){
+        User user = null;
 
         final String DB_URL="jdbc:mysql://localhost/farmacia?serverTimezone=UTC";
         final String USERNAME= "csjurado";
@@ -128,13 +145,13 @@ public class inicio extends JDialog{
             System.out.println("Conexion ok ");
             ResultSet resultSet=preparedStatement.executeQuery();
             if(resultSet.next()){
-                bodeguero= new Bodeguero();
+                user= new User();
 
-                bodeguero.nombre=resultSet.getString("nombre");
-                bodeguero.email=resultSet.getString("email");
-                bodeguero.celular=resultSet.getString("celular");
-                bodeguero.direccion=resultSet.getString("direccion");
-                bodeguero.password=resultSet.getString("password");
+                user.nombre=resultSet.getString("nombre");
+                user.email=resultSet.getString("email");
+                user.celular=resultSet.getString("celular");
+                user.direccion=resultSet.getString("direccion");
+                user.password=resultSet.getString("password");
             }
             stmt.close();
             conn.close();
@@ -143,15 +160,47 @@ public class inicio extends JDialog{
             e.printStackTrace();
         }
 
-        return bodeguero;
+        return user;
     }
 
 
+    private User getAuthenticationAdministrador(String email,String password){
+        User user = null;
+
+        final String DB_URL="jdbc:mysql://localhost/farmacia?serverTimezone=UTC";
+        final String USERNAME= "csjurado";
+        final String PASSWORD= "12345";
+        try{
+            Connection conn = DriverManager.getConnection(DB_URL,USERNAME,PASSWORD);
+            Statement stmt=conn.createStatement();
+            String sql="SELECT * FROM administradores WHERE email=? AND password=?";
+            PreparedStatement preparedStatement=conn.prepareStatement(sql);
+            preparedStatement.setString(1,email);
+            preparedStatement.setString(2,password);
+            System.out.println("Conexion ok ");
+            ResultSet resultSet=preparedStatement.executeQuery();
+            if(resultSet.next()){
+                user= new User();
+
+                user.nombre=resultSet.getString("nombre");
+                user.email=resultSet.getString("email");
+                user.celular=resultSet.getString("celular");
+                user.direccion=resultSet.getString("direccion");
+                user.password=resultSet.getString("password");
+            }
+            stmt.close();
+            conn.close();
+        }catch (Exception e){
+            System.out.println("Error de conexion");
+            e.printStackTrace();
+        }
+
+        return user;
+    }
 
     public static void main(String[] args) {
         inicio loginForm = new inicio(null);
         User user = loginForm.user;
-        Bodeguero bodeguero =loginForm.bodeguero;
 
         if(user!=null){
 
