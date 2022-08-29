@@ -23,7 +23,7 @@ public class panelCajeros extends JFrame{
     private JTextField codigoProductoTF;
     private JTextField cantidadProdcutoTF;
     private JTextField precioProdcutoTF;
-    private JButton mostrarButton;
+
     Connection con;
     Statement st;
     ResultSet rs;
