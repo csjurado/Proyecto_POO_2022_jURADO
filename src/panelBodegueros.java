@@ -22,8 +22,7 @@ public class panelBodegueros extends JFrame{
 
     public panelBodegueros (){
         try{
-            con= DriverManager.getConnection("jdbc:mysql://localhost/farmacia?serverTimezone=UTC","csjurado","12345");
-            //con= DriverManager.getConnection("jdbc:mysql://mysql-jzaldumbide.alwaysdata.net/jzaldumbide_bdd?serverTimezone=UTC","278457","rYqhic-buvwoh-1tecqe");
+            con= DriverManager.getConnection("jdbc:mysql://mysql-csjurado.alwaysdata.net/csjurado_bdd?serverTimezone=UTC","csjurado","Montufar1996");
             st=con.createStatement();
             String s1="select * from productos ";
             rs= st.executeQuery(s1);
@@ -84,9 +83,9 @@ public class panelBodegueros extends JFrame{
         String nombreProducto = "0";
         nombreProducto=nombreProductoTF.getText();
 
-        final String DB_URL="jdbc:mysql://localhost/farmacia?serverTimezone=UTC";
-        final String USERNAME="csjurado";
-        final String PASSWORD="12345";
+        final String DB_URL="jdbc:mysql://mysql-csjurado.alwaysdata.net/csjurado_bdd?serverTimezone=UTC";
+        final String USERNAME= "csjurado";
+        final String PASSWORD= "Montufar1996";
 
 
         try{
@@ -135,9 +134,9 @@ public class panelBodegueros extends JFrame{
     }
 
     public void Eliminar_producto(){
-        final String DB_URL="jdbc:mysql://localhost/farmacia?serverTimezone=UTC";
-        final String USERNAME="csjurado";
-        final String PASSWORD="12345";
+        final String DB_URL="jdbc:mysql://mysql-csjurado.alwaysdata.net/csjurado_bdd?serverTimezone=UTC";
+        final String USERNAME= "csjurado";
+        final String PASSWORD= "Montufar1996";
         String borrarid=nombreProductoTF.getText();
 
         try{
@@ -164,9 +163,9 @@ public class panelBodegueros extends JFrame{
         codigoProducto= codigoProductoTF.getText();
         cantidadProducto= cantidadProdcutoTF.getText();
         precioProducto= precioProdcutoTF.getText();
-        final String DB_URL="jdbc:mysql://localhost/farmacia?serverTimezone=UTC";
-        final String USERNAME="csjurado";
-        final String PASSWORD="12345";
+        final String DB_URL="jdbc:mysql://mysql-csjurado.alwaysdata.net/csjurado_bdd?serverTimezone=UTC";
+        final String USERNAME= "csjurado";
+        final String PASSWORD= "Montufar1996";
         try{
             Connection conn= DriverManager.getConnection(DB_URL,USERNAME,PASSWORD);
             Statement stmt= conn.createStatement();
@@ -201,9 +200,9 @@ public class panelBodegueros extends JFrame{
 
 
 
-        final String DB_URL="jdbc:mysql://localhost/farmacia?serverTimezone=UTC";
-        final String USERNAME="csjurado";
-        final String PASSWORD="12345";
+        final String DB_URL="jdbc:mysql://mysql-csjurado.alwaysdata.net/csjurado_bdd?serverTimezone=UTC";
+        final String USERNAME= "csjurado";
+        final String PASSWORD= "Montufar1996";
 
 
         try{

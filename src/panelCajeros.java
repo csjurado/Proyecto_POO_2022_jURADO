@@ -1,6 +1,9 @@
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 import java.sql.*;
 
 public class panelCajeros extends JFrame{
@@ -23,10 +26,13 @@ public class panelCajeros extends JFrame{
     private JTextField codigoProductoTF;
     private JTextField cantidadProdcutoTF;
     private JTextField precioProdcutoTF;
+    private JButton agregarButton;
+    private JTable tablasDeProductos;
 
     Connection con;
     Statement st;
     ResultSet rs;
+
     public static void main(String[] args) {
         JFrame frame = new JFrame("VENTANA DE CAJEROS");
         frame.setContentPane(new panelCajeros().cajeros);
@@ -37,8 +43,7 @@ public class panelCajeros extends JFrame{
     public panelCajeros (){
 
             try{
-                con= DriverManager.getConnection("jdbc:mysql://localhost/farmacia?serverTimezone=UTC","csjurado","12345");
-                //con= DriverManager.getConnection("jdbc:mysql://mysql-jzaldumbide.alwaysdata.net/jzaldumbide_bdd?serverTimezone=UTC","278457","rYqhic-buvwoh-1tecqe");
+                con= DriverManager.getConnection("jdbc:mysql://mysql-csjurado.alwaysdata.net/csjurado_bdd?serverTimezone=UTC","csjurado","Montufar1996");
                 st=con.createStatement();
                 String s="select * from clientes ";
                 rs=st.executeQuery(s);
@@ -101,16 +106,28 @@ public class panelCajeros extends JFrame{
                 Buscar_producto();
             }
         });
+
+        String titulos[] = {"ID", "ID", "PRODUCTO", "DESCRIPCIÓN", "CATEGORÍA.", "CANTIDAD","PRECIO", "TOTAL","COSTO"};
+        //dtmDetalle.setColumnIdentifiers(titulos);
+        //tblDetalleProducto = new javax.swing.JTable();
+        //tblDetalleProducto.setModel(dtmDetalle);
+        //CrearTablaDetalleProducto();
+
+        tablasDeProductos.addComponentListener(new ComponentAdapter() {
+            @Override
+            public void componentResized(ComponentEvent e) {
+                super.componentResized(e);
+            }
+        });
     }
     public void Buscar_cliente(){
 
         String nombre = "0";
         nombre=nombreTF.getText();
 
-        final String DB_URL="jdbc:mysql://localhost/farmacia?serverTimezone=UTC";
-        final String USERNAME="csjurado";
-        final String PASSWORD="12345";
-
+        final String DB_URL="jdbc:mysql://mysql-csjurado.alwaysdata.net/csjurado_bdd?serverTimezone=UTC";
+        final String USERNAME= "csjurado";
+        final String PASSWORD= "Montufar1996";
 
         try{
             Connection conn= DriverManager.getConnection(DB_URL,USERNAME,PASSWORD);
@@ -168,9 +185,9 @@ public class panelCajeros extends JFrame{
         String nombreProducto = "0";
         nombreProducto=nombreProductoTF.getText();
 
-        final String DB_URL="jdbc:mysql://localhost/farmacia?serverTimezone=UTC";
-        final String USERNAME="csjurado";
-        final String PASSWORD="12345";
+        final String DB_URL="jdbc:mysql://mysql-csjurado.alwaysdata.net/csjurado_bdd?serverTimezone=UTC";
+        final String USERNAME= "csjurado";
+        final String PASSWORD= "Montufar1996";
 
 
         try{

@@ -98,9 +98,9 @@ public class inicio extends JDialog{
     private User getAuthenticationUser(String email,String password){
         User user = null;
 
-        final String DB_URL="jdbc:mysql://localhost/farmacia?serverTimezone=UTC";
+        final String DB_URL="jdbc:mysql://mysql-csjurado.alwaysdata.net/csjurado_bdd?serverTimezone=UTC";
         final String USERNAME= "csjurado";
-        final String PASSWORD= "12345";
+        final String PASSWORD= "Montufar1996";
         try{
             Connection conn = DriverManager.getConnection(DB_URL,USERNAME,PASSWORD);
             Statement stmt=conn.createStatement();
@@ -132,9 +132,9 @@ public class inicio extends JDialog{
     private User getAuthenticationBodeguero(String email,String password){
         User user = null;
 
-        final String DB_URL="jdbc:mysql://localhost/farmacia?serverTimezone=UTC";
+        final String DB_URL="jdbc:mysql://mysql-csjurado.alwaysdata.net/csjurado_bdd?serverTimezone=UTC";
         final String USERNAME= "csjurado";
-        final String PASSWORD= "12345";
+        final String PASSWORD= "Montufar1996";
         try{
             Connection conn = DriverManager.getConnection(DB_URL,USERNAME,PASSWORD);
             Statement stmt=conn.createStatement();
@@ -167,9 +167,9 @@ public class inicio extends JDialog{
     private User getAuthenticationAdministrador(String email,String password){
         User user = null;
 
-        final String DB_URL="jdbc:mysql://localhost/farmacia?serverTimezone=UTC";
+        final String DB_URL="jdbc:mysql://mysql-csjurado.alwaysdata.net/csjurado_bdd?serverTimezone=UTC";
         final String USERNAME= "csjurado";
-        final String PASSWORD= "12345";
+        final String PASSWORD= "Montufar1996";
         try{
             Connection conn = DriverManager.getConnection(DB_URL,USERNAME,PASSWORD);
             Statement stmt=conn.createStatement();
