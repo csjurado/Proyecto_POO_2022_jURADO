@@ -171,16 +171,14 @@ public class panelBodegueros extends JFrame{
             Statement stmt= conn.createStatement();
             String sql="update productos set codigo=?,cantidad=?,precio=? where nombreProducto=?";
             PreparedStatement pst=conn.prepareStatement(sql);
-            //pst.setString(1,id);
             pst.setString(1,codigoProducto);
             pst.setString(2,cantidadProducto);
             pst.setString(3,precioProducto);
             pst.setString(4,nombreProducto);
-            //ResultSet resultSet=pst.executeQuery();
             pst.executeUpdate();
             ImageIcon icono = new ImageIcon("src/images/user.png");
             JOptionPane.showMessageDialog(null, "REGISTRO ACTUALIZADO",
-                    "BUSCAR  ", JOptionPane.PLAIN_MESSAGE, icono);
+                    "PRODUCTOS  ", JOptionPane.PLAIN_MESSAGE, icono);
             stmt.close();
             conn.close();
             Limpiar_producto();

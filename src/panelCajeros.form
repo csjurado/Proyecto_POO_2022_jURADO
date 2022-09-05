@@ -138,7 +138,10 @@
             <preferred-size width="150" height="-1"/>
           </grid>
         </constraints>
-        <properties/>
+        <properties>
+          <editable value="false"/>
+          <enabled value="true"/>
+        </properties>
       </component>
       <component id="7ef4f" class="javax.swing.JTextField" binding="codigoProductoTF">
         <constraints>
@@ -146,7 +149,9 @@
             <preferred-size width="150" height="-1"/>
           </grid>
         </constraints>
-        <properties/>
+        <properties>
+          <editable value="false"/>
+        </properties>
       </component>
       <component id="437cd" class="javax.swing.JTextField" binding="cantidadProdcutoTF">
         <constraints>
@@ -154,7 +159,9 @@
             <preferred-size width="150" height="-1"/>
           </grid>
         </constraints>
-        <properties/>
+        <properties>
+          <editable value="false"/>
+        </properties>
       </component>
       <component id="b5647" class="javax.swing.JTextField" binding="precioProdcutoTF">
         <constraints>
@@ -162,7 +169,9 @@
             <preferred-size width="150" height="-1"/>
           </grid>
         </constraints>
-        <properties/>
+        <properties>
+          <editable value="false"/>
+        </properties>
       </component>
       <component id="995c5" class="javax.swing.JButton" binding="comprarButton" default-binding="true">
         <constraints>
@@ -225,22 +234,6 @@
           <text value="Buscar"/>
         </properties>
       </component>
-      <component id="c1a70" class="javax.swing.JLabel">
-        <constraints>
-          <grid row="3" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
-        </constraints>
-        <properties>
-          <text value="CELULAR"/>
-        </properties>
-      </component>
-      <component id="7c591" class="javax.swing.JLabel">
-        <constraints>
-          <grid row="3" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
-        </constraints>
-        <properties>
-          <text value="DIRECCION "/>
-        </properties>
-      </component>
       <component id="3bb05" class="javax.swing.JButton" binding="agregarButton" default-binding="true">
         <constraints>
           <grid row="11" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
@@ -249,22 +242,32 @@
           <text value="Agregar"/>
         </properties>
       </component>
-      <scrollpane id="7c154">
+      <component id="b3909" class="javax.swing.JTextArea" binding="textArea1" default-binding="true">
         <constraints>
-          <grid row="10" column="0" row-span="1" col-span="4" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+          <grid row="10" column="0" row-span="1" col-span="4" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
+            <preferred-size width="150" height="50"/>
+          </grid>
         </constraints>
-        <properties/>
-        <border type="none"/>
-        <children>
-          <component id="15809" class="javax.swing.JTable" binding="tablasDeProductos">
-            <constraints/>
-            <properties>
-              <autoCreateRowSorter value="false"/>
-              <autoResizeMode value="1"/>
-            </properties>
-          </component>
-        </children>
-      </scrollpane>
+        <properties>
+          <text value=""/>
+        </properties>
+      </component>
+      <component id="c1a70" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="3" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="CELULAR"/>
+        </properties>
+      </component>
+      <component id="7c591" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="3" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="DIRECCION "/>
+        </properties>
+      </component>
     </children>
   </grid>
 </form>

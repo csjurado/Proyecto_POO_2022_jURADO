@@ -27,11 +27,11 @@ public class panelCajeros extends JFrame{
     private JTextField cantidadProdcutoTF;
     private JTextField precioProdcutoTF;
     private JButton agregarButton;
-    private JTable tablasDeProductos;
-
+    private JTextArea textArea1;
     Connection con;
     Statement st;
     ResultSet rs;
+    ImageIcon icono2 = new ImageIcon("src/images/medicine.png");
 
     public static void main(String[] args) {
         JFrame frame = new JFrame("VENTANA DE CAJEROS");
@@ -107,17 +107,13 @@ public class panelCajeros extends JFrame{
             }
         });
 
-        String titulos[] = {"ID", "ID", "PRODUCTO", "DESCRIPCIÓN", "CATEGORÍA.", "CANTIDAD","PRECIO", "TOTAL","COSTO"};
-        //dtmDetalle.setColumnIdentifiers(titulos);
-        //tblDetalleProducto = new javax.swing.JTable();
-        //tblDetalleProducto.setModel(dtmDetalle);
-        //CrearTablaDetalleProducto();
-
-        tablasDeProductos.addComponentListener(new ComponentAdapter() {
+        comprarButton.addActionListener(new ActionListener() {
             @Override
-            public void componentResized(ComponentEvent e) {
-                super.componentResized(e);
+            public void actionPerformed(ActionEvent e) {
+            Comprar();
             }
+        });
+        textArea1.addComponentListener(new ComponentAdapter() {
         });
     }
     public void Buscar_cliente(){
@@ -146,8 +142,9 @@ public class panelCajeros extends JFrame{
                 id=rs.getString(1);
                 nombre=rs.getString(2);
                 email=rs.getString(3);
-                direccion=rs.getString(4);
-                celular=rs.getString(5);
+                celular=rs.getString(4);
+                direccion=rs.getString(5);
+
 
                 System.out.println();
                 idTF.setText(id);
@@ -188,7 +185,6 @@ public class panelCajeros extends JFrame{
         final String DB_URL="jdbc:mysql://mysql-csjurado.alwaysdata.net/csjurado_bdd?serverTimezone=UTC";
         final String USERNAME= "csjurado";
         final String PASSWORD= "Montufar1996";
-
 
         try{
             Connection conn= DriverManager.getConnection(DB_URL,USERNAME,PASSWORD);
@@ -232,6 +228,57 @@ public class panelCajeros extends JFrame{
             System.out.println("SQL incorrecto");
 
         }
+    }
+
+    public void Comprar (){
+
+        int salida = JOptionPane.showConfirmDialog(null,"Deseas comprar el producto : "+nombreProductoTF.getText(),"COMPRAS",JOptionPane.YES_NO_CANCEL_OPTION,3,icono2);
+        System.out.println(salida);
+        if (salida==0){
+            int compra;
+             compra = Integer.parseInt(JOptionPane.showInputDialog(null," Cuanto desea comprar del producto : "+nombreProductoTF.getText(),"COMPRAS",JOptionPane.INFORMATION_MESSAGE));
+             int cantidad=Integer.parseInt(cantidadProdcutoTF.getText());
+             int nuevaCantidad = cantidad-compra;
+             cantidadProdcutoTF.setText(String.valueOf(nuevaCantidad));
+             Modificar_Productos();
+        }
+    }
+
+    public void Modificar_Productos(){
+        String nombreProducto,codigoProducto, cantidadProducto, precioProducto;
+        nombreProducto=nombreProductoTF.getText();
+        codigoProducto= codigoProductoTF.getText();
+        cantidadProducto= cantidadProdcutoTF.getText();
+        precioProducto= precioProdcutoTF.getText();
+        final String DB_URL="jdbc:mysql://mysql-csjurado.alwaysdata.net/csjurado_bdd?serverTimezone=UTC";
+        final String USERNAME= "csjurado";
+        final String PASSWORD= "Montufar1996";
+        try{
+            Connection conn= DriverManager.getConnection(DB_URL,USERNAME,PASSWORD);
+            Statement stmt= conn.createStatement();
+            String sql="update productos set codigo=?,cantidad=?,precio=? where nombreProducto=?";
+            PreparedStatement pst=conn.prepareStatement(sql);
+            pst.setString(1,codigoProducto);
+            pst.setString(2,cantidadProducto);
+            pst.setString(3,precioProducto);
+            pst.setString(4,nombreProducto);
+            pst.executeUpdate();
+            JOptionPane.showMessageDialog(null, "VENTA SATISFACTORIA", "PRODUCTOS  ", JOptionPane.PLAIN_MESSAGE, icono2);
+            stmt.close();
+            conn.close();
+            Limpiar_producto();
+
+        } catch(SQLException ex){
+            ex.printStackTrace();
+            System.out.println("SQL incorrecto");
+
+        }
+    }
+    public void Limpiar_producto(){
+        nombreProductoTF.setText("");
+        codigoProductoTF.setText("");
+        cantidadProdcutoTF.setText("");
+        precioProdcutoTF.setText("");
     }
 
 }
