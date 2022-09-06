@@ -26,12 +26,22 @@ public class panelCajeros extends JFrame{
     private JTextField codigoProductoTF;
     private JTextField cantidadProdcutoTF;
     private JTextField precioProdcutoTF;
-    private JButton agregarButton;
-    private JTextArea textArea1;
+    private JButton MostrarProductosBTN;
+    private JTable tabla1;
+    private JButton editarInformaciónButton;
+    private JButton limpiarBusquedaBTN;
+    private JTable tabla2;
+    private JTextField cantidadAComprarTF;
+
     Connection con;
     Statement st;
     ResultSet rs;
     ImageIcon icono2 = new ImageIcon("src/images/medicine.png");
+
+    DefaultTableModel modelo1 = new DefaultTableModel();
+    DefaultTableModel modelo2 = new DefaultTableModel();
+    int item;
+
 
     public static void main(String[] args) {
         JFrame frame = new JFrame("VENTANA DE CAJEROS");
@@ -69,7 +79,14 @@ public class panelCajeros extends JFrame{
                     JOptionPane.showMessageDialog(null,"Error cierre");
                 }
             }
-
+            // ******************************************** TABLA ****************************************************************************
+        modelo2.addColumn("Nombre");
+        modelo2.addColumn("Codigo");
+        modelo2.addColumn("Stock");
+        modelo2.addColumn("Cantidad");
+        modelo2.addColumn("Precio");
+        modelo2.addColumn("Total");
+            // ******************************************** TABLA ****************************************************************************
         clienteAntiguoBTN.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -110,12 +127,33 @@ public class panelCajeros extends JFrame{
         comprarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-            Comprar();
+            //Comprar();
+            Comprar_producto();
+
             }
         });
-        textArea1.addComponentListener(new ComponentAdapter() {
+
+
+        tabla1.addComponentListener(new ComponentAdapter() {
+            @Override
+            public void componentResized(ComponentEvent e) {
+                super.componentResized(e);
+            }
+        });
+        limpiarBusquedaBTN.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Limpiar_producto();
+            }
+        });
+        MostrarProductosBTN.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                mostrarProductos();
+            }
         });
     }
+
     public void Buscar_cliente(){
 
         String nombre = "0";
@@ -185,7 +223,7 @@ public class panelCajeros extends JFrame{
         final String DB_URL="jdbc:mysql://mysql-csjurado.alwaysdata.net/csjurado_bdd?serverTimezone=UTC";
         final String USERNAME= "csjurado";
         final String PASSWORD= "Montufar1996";
-
+        //**************************************************** BUSQUEDA ************************************************
         try{
             Connection conn= DriverManager.getConnection(DB_URL,USERNAME,PASSWORD);
             Statement stmt= conn.createStatement();
@@ -215,9 +253,8 @@ public class panelCajeros extends JFrame{
 
             }
             else {
-                ImageIcon icono = new ImageIcon("src/images/user.png");
-                JOptionPane.showMessageDialog(null, "El usuario NO SE ENCUENTRA EN LA BASE DE DATOS",
-                        "BUSCAR  ", JOptionPane.PLAIN_MESSAGE, icono);
+                JOptionPane.showMessageDialog(null, "EL PRODUCTO NO SE ENCUENTRA DISPONIBLE",
+                        "BUSCAR  ", JOptionPane.PLAIN_MESSAGE, icono2);
                 Limpiar();
             }
             stmt.close();
@@ -228,6 +265,52 @@ public class panelCajeros extends JFrame{
             System.out.println("SQL incorrecto");
 
         }
+        //**************************************************** BUSQUEDA ************************************************
+        // ******************************************** TABLA ***********************************************
+        String where ="";
+        if(!"".equals(nombreProducto)){
+            where = "where nombreProducto ='"+ nombreProducto + "'";
+        }
+        try{
+            DefaultTableModel modelo = new DefaultTableModel();
+            tabla1.setModel(modelo);
+            con= DriverManager.getConnection("jdbc:mysql://mysql-csjurado.alwaysdata.net/csjurado_bdd?serverTimezone=UTC","csjurado","Montufar1996");
+            st=con.createStatement();
+            String s="select id,nombreProducto,codigo,cantidad,precio from productos "+where;
+            rs=st.executeQuery(s);
+            ResultSetMetaData rsMD = rs.getMetaData();
+            int cantidadColumnas = rsMD.getColumnCount();
+            modelo.addColumn("ID");
+            modelo.addColumn("Nombre del producto");
+            modelo.addColumn("Código");
+            modelo.addColumn("Cantidad");
+            modelo.addColumn("Precio");
+            while(rs.next()){
+                Object [] filas = new Object[cantidadColumnas];
+                for(int i=0; i<cantidadColumnas;i++ ){
+                    filas[i] =rs.getObject(i+1);
+
+                }
+                modelo.addRow(filas);
+            }
+        }
+        catch (Exception e){
+            JOptionPane.showMessageDialog(null,e);
+        }finally {
+            try{
+                st.close();
+                rs.close();
+                con.close();
+            }
+            catch(Exception e){
+                JOptionPane.showMessageDialog(null,"Error cierre");
+            }
+        }
+
+        // ******************************************** TABLA ***********************************************
+
+
+
     }
 
     public void Comprar (){
@@ -280,5 +363,99 @@ public class panelCajeros extends JFrame{
         cantidadProdcutoTF.setText("");
         precioProdcutoTF.setText("");
     }
+/*
+    public void tablaProducto(JTable tabla2){
+        DefaultTableModel modelo1 = new DefaultTableModel();
+        tabla2.setModel(modelo1);
+        String nombreProducto =nombreProductoTF.getText();
+        String codigo =codigoProductoTF.getText();
+        String cantidad = cantidadProdcutoTF.getText();
+        String precio = precioProdcutoTF.getText();
+        modelo1.addRow(new Object[]{nombreProducto,codigo,cantidad,precio});
+        //tabla2.add(Comprar());
+    }
+ */
+    public void Comprar_producto(){
+        tabla2.setModel(modelo2);
+        if(!"".equals(cantidadAComprarTF.getText())){
+            String codigo = codigoProductoTF.getText();
+            String nombre = nombreProductoTF.getText();
+            double precio = Double.parseDouble(precioProdcutoTF.getText());
+            int stock = Integer.parseInt(cantidadProdcutoTF.getText());
+            int cantidad = Integer.parseInt(cantidadAComprarTF.getText());
+            double total = cantidad*precio;
+            if(stock>=cantidad){
+                item = item+1;
+                modelo2=(DefaultTableModel) tabla2.getModel();
+                Object[] O =new Object[6];
+                O[0]=nombre;
+                O[1]=codigo;
+                O[2]=stock;
+                O[3]=cantidad;
+                O[4]=precio;
+                O[5]=total;
+                modelo2.addRow(O);
+            } else {
+                JOptionPane.showMessageDialog(null,"STOCK NO DISPONIBLE ");
+            }
+        }else {
+            JOptionPane.showMessageDialog(null,"Ingrese UNA CANTIDAD ");
+        }
+        calcularTotal();
+    }
+    public void mostrarProductos(){
+        try{
+            tabla1.setModel(modelo1);
+            con= DriverManager.getConnection("jdbc:mysql://mysql-csjurado.alwaysdata.net/csjurado_bdd?serverTimezone=UTC","csjurado","Montufar1996");
+            st=con.createStatement();
+            String s="select id,nombreProducto,codigo,cantidad,precio from productos ";
+            rs=st.executeQuery(s);
+            ResultSetMetaData rsMD = rs.getMetaData();
+            int cantidadColumnas = rsMD.getColumnCount();
+            modelo1.addColumn("ID");
+            modelo1.addColumn("Nombre del producto");
+            modelo1.addColumn("Código");
+            modelo1.addColumn("Cantidad");
+            modelo1.addColumn("Precio");
+            while(rs.next()){
+                Object [] filas = new Object[cantidadColumnas];
+                for(int i=0; i<cantidadColumnas;i++ ){
+                    filas[i] =rs.getObject(i+1);
+                }
+                modelo1.addRow(filas);
+            }
+        }
+        catch (Exception e){
+            JOptionPane.showMessageDialog(null,e);
+        }finally {
+            try{
+                st.close();
+                rs.close();
+                con.close();
+            }
+            catch(Exception e){
+                JOptionPane.showMessageDialog(null,"Error cierre");
+            }
+        }
+    }
+    void calcularTotal(){
+
+    }
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -15,6 +15,7 @@ public class panelBodegueros extends JFrame{
     private JButton modificarUnProductoButton;
     private JButton buscarUnProductoButton;
     private JButton limpiarButton;
+    private JTable Jtable;
 
     Connection con;
     Statement st;
