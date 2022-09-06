@@ -11,6 +11,7 @@ public class inicio extends JDialog{
     private JTextField usuarioTF;
     private JPasswordField passwordTF;
     private JPanel panelInicio;
+    private JLabel icono2;
 
     public inicio(JFrame parent) {
 

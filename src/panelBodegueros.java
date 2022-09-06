@@ -1,4 +1,5 @@
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.*;
@@ -15,11 +16,15 @@ public class panelBodegueros extends JFrame{
     private JButton modificarUnProductoButton;
     private JButton buscarUnProductoButton;
     private JButton limpiarButton;
-    private JTable Jtable;
+    private JTable tabla1;
+    private JTextField idTF;
+    //******************************************** VARIABLES
+    DefaultTableModel modelo1 = new DefaultTableModel();
 
     Connection con;
     Statement st;
     ResultSet rs;
+    //**************************************** IMAGENES **********************
 
     public panelBodegueros (){
         try{
@@ -43,6 +48,7 @@ public class panelBodegueros extends JFrame{
                 JOptionPane.showMessageDialog(null,"Error cierre");
             }
         }
+        mostrarProductos();
         productosCB.addActionListener(new ActionListener() {
             @Override
                 public void actionPerformed(ActionEvent e) {
@@ -83,12 +89,9 @@ public class panelBodegueros extends JFrame{
     public void Buscar_producto(){
         String nombreProducto = "0";
         nombreProducto=nombreProductoTF.getText();
-
         final String DB_URL="jdbc:mysql://mysql-csjurado.alwaysdata.net/csjurado_bdd?serverTimezone=UTC";
         final String USERNAME= "csjurado";
         final String PASSWORD= "Montufar1996";
-
-
         try{
             Connection conn= DriverManager.getConnection(DB_URL,USERNAME,PASSWORD);
             Statement stmt= conn.createStatement();
@@ -97,14 +100,14 @@ public class panelBodegueros extends JFrame{
             pst.setString(1,nombreProducto);
             ResultSet rs=pst.executeQuery();
             if(rs.next()==true){
-                String codigo,cantidad, precio;
-
+                String id,codigo,cantidad, precio;
+                id=rs.getString(1);
                 nombreProducto=rs.getString(2);
                 codigo=rs.getString(3);
                 cantidad=rs.getString(4);
                 precio=rs.getString(5);
 
-                System.out.println();
+                idTF.setText(id);
                 nombreProductoTF.setText(nombreProducto);
                 codigoProductoTF.setText(codigo);
                 cantidadProdcutoTF.setText(cantidad);
@@ -113,9 +116,8 @@ public class panelBodegueros extends JFrame{
 
             }
             else {
-                ImageIcon icono = new ImageIcon("src/images/user.png");
-                JOptionPane.showMessageDialog(null, "El usuario NO SE ENCUENTRA EN LA BASE DE DATOS",
-                        "BUSCAR  ", JOptionPane.PLAIN_MESSAGE, icono);
+                JOptionPane.showMessageDialog(null, "El PRODUCTO NO SE ENCUENTRA EN LA BASE DE DATOS ",
+                        "BUSCAR  ", JOptionPane.PLAIN_MESSAGE);
                 Limpiar_producto();
             }
             stmt.close();
@@ -124,10 +126,10 @@ public class panelBodegueros extends JFrame{
         } catch(SQLException ex){
             ex.printStackTrace();
             System.out.println("SQL incorrecto");
-
         }
     }
     public void Limpiar_producto(){
+        idTF.setText("");
         nombreProductoTF.setText("");
         codigoProductoTF.setText("");
         cantidadProdcutoTF.setText("");
@@ -148,7 +150,7 @@ public class panelBodegueros extends JFrame{
             pst.setString(1,borrarid);
 
             pst.executeUpdate();
-            JOptionPane.showMessageDialog(null,"Registro borrado");
+            JOptionPane.showMessageDialog(null,"PRODUCTO BORRADO ");
             stmt.close();
             conn.close();
 
@@ -177,9 +179,8 @@ public class panelBodegueros extends JFrame{
             pst.setString(3,precioProducto);
             pst.setString(4,nombreProducto);
             pst.executeUpdate();
-            ImageIcon icono = new ImageIcon("src/images/user.png");
-            JOptionPane.showMessageDialog(null, "REGISTRO ACTUALIZADO",
-                    "PRODUCTOS  ", JOptionPane.PLAIN_MESSAGE, icono);
+            JOptionPane.showMessageDialog(null, "DATOS DEL PRODUCTO ACTUALIZADO CON EXITO",
+                    "PRODUCTOS  ", JOptionPane.PLAIN_MESSAGE);
             stmt.close();
             conn.close();
             Limpiar_producto();
@@ -213,9 +214,8 @@ public class panelBodegueros extends JFrame{
             pst.setString(2,codigoProducto);
             pst.setString(3,cantidadProducto);
             pst.setString(4,precioProducto);
-            ImageIcon icono = new ImageIcon("src/images/user.png");
-            JOptionPane.showMessageDialog(null, "USUARIO CREADO CON EXITO  ",
-                    "AYUDA PARA INGRESAR ", JOptionPane.PLAIN_MESSAGE, icono);
+            JOptionPane.showMessageDialog(null, "PRODUCTO AÑADIDO CON EXITO  ",
+                    "NUEVO PRODUCTO REGISTRADO ", JOptionPane.PLAIN_MESSAGE);
             pst.executeUpdate();
             stmt.close();
             conn.close();
@@ -224,6 +224,42 @@ public class panelBodegueros extends JFrame{
             ex.printStackTrace();
             System.out.println("SQL incorrecto");
 
+        }
+    }
+
+    public void mostrarProductos(){
+        try{
+            tabla1.setModel(modelo1);
+            con= DriverManager.getConnection("jdbc:mysql://mysql-csjurado.alwaysdata.net/csjurado_bdd?serverTimezone=UTC","csjurado","Montufar1996");
+            st=con.createStatement();
+            String s="select id,nombreProducto,codigo,cantidad,precio from productos ";
+            rs=st.executeQuery(s);
+            ResultSetMetaData rsMD = rs.getMetaData();
+            int cantidadColumnas = rsMD.getColumnCount();
+            modelo1.addColumn("ID");
+            modelo1.addColumn("Nombre del producto");
+            modelo1.addColumn("Código");
+            modelo1.addColumn("Cantidad");
+            modelo1.addColumn("Precio");
+            while(rs.next()){
+                Object [] filas = new Object[cantidadColumnas];
+                for(int i=0; i<cantidadColumnas;i++ ){
+                    filas[i] =rs.getObject(i+1);
+                }
+                modelo1.addRow(filas);
+            }
+        }
+        catch (Exception e){
+            JOptionPane.showMessageDialog(null,e);
+        }finally {
+            try{
+                st.close();
+                rs.close();
+                con.close();
+            }
+            catch(Exception e){
+                JOptionPane.showMessageDialog(null,"Error cierre");
+            }
         }
     }
 }

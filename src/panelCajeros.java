@@ -32,15 +32,20 @@ public class panelCajeros extends JFrame{
     private JButton limpiarBusquedaBTN;
     private JTable tabla2;
     private JTextField cantidadAComprarTF;
+    private JTextField totalPagarTF;
 
-    Connection con;
-    Statement st;
-    ResultSet rs;
     ImageIcon icono2 = new ImageIcon("src/images/medicine.png");
 
     DefaultTableModel modelo1 = new DefaultTableModel();
     DefaultTableModel modelo2 = new DefaultTableModel();
+    // **************************************** Variables ***********************************
+    Connection con;
+    Statement st;
+    ResultSet rs;
     int item;
+    double totalPagar;
+    int cant;
+    double pre;
 
 
     public static void main(String[] args) {
@@ -150,6 +155,12 @@ public class panelCajeros extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
                 mostrarProductos();
+            }
+        });
+        finalizarButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                calcularTotal();
             }
         });
     }
@@ -346,7 +357,6 @@ public class panelCajeros extends JFrame{
             pst.setString(3,precioProducto);
             pst.setString(4,nombreProducto);
             pst.executeUpdate();
-            JOptionPane.showMessageDialog(null, "VENTA SATISFACTORIA", "PRODUCTOS  ", JOptionPane.PLAIN_MESSAGE, icono2);
             stmt.close();
             conn.close();
             Limpiar_producto();
@@ -363,18 +373,7 @@ public class panelCajeros extends JFrame{
         cantidadProdcutoTF.setText("");
         precioProdcutoTF.setText("");
     }
-/*
-    public void tablaProducto(JTable tabla2){
-        DefaultTableModel modelo1 = new DefaultTableModel();
-        tabla2.setModel(modelo1);
-        String nombreProducto =nombreProductoTF.getText();
-        String codigo =codigoProductoTF.getText();
-        String cantidad = cantidadProdcutoTF.getText();
-        String precio = precioProdcutoTF.getText();
-        modelo1.addRow(new Object[]{nombreProducto,codigo,cantidad,precio});
-        //tabla2.add(Comprar());
-    }
- */
+
     public void Comprar_producto(){
         tabla2.setModel(modelo2);
         if(!"".equals(cantidadAComprarTF.getText())){
@@ -383,6 +382,8 @@ public class panelCajeros extends JFrame{
             double precio = Double.parseDouble(precioProdcutoTF.getText());
             int stock = Integer.parseInt(cantidadProdcutoTF.getText());
             int cantidad = Integer.parseInt(cantidadAComprarTF.getText());
+            int nuevaCantidad = stock - cantidad;
+            cantidadProdcutoTF.setText(String.valueOf(nuevaCantidad));
             double total = cantidad*precio;
             if(stock>=cantidad){
                 item = item+1;
@@ -401,7 +402,10 @@ public class panelCajeros extends JFrame{
         }else {
             JOptionPane.showMessageDialog(null,"Ingrese UNA CANTIDAD ");
         }
-        calcularTotal();
+
+        Modificar_Productos();
+
+
     }
     public void mostrarProductos(){
         try{
@@ -439,7 +443,15 @@ public class panelCajeros extends JFrame{
         }
     }
     void calcularTotal(){
-
+        totalPagar=0;
+        for (int i =0;i<tabla2.getRowCount();i++){
+            cant=Integer.parseInt(tabla2.getValueAt(i,3).toString());
+            pre=Double.parseDouble(tabla2.getValueAt(i,4).toString());
+            totalPagar=totalPagar+(cant*pre);
+        }
+        String.valueOf(totalPagar);
+        totalPagarTF.setText(""+totalPagar);
+        JOptionPane.showMessageDialog(null, "VENTA SATISFACTORIA", "PRODUCTOS  ", JOptionPane.PLAIN_MESSAGE, icono2);
     }
 
 }

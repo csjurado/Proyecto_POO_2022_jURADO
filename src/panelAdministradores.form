@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="panelAdministradores">
-  <grid id="27dc6" binding="administradores" layout-manager="GridLayoutManager" row-count="4" column-count="6" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+  <grid id="27dc6" binding="administradores" layout-manager="GridLayoutManager" row-count="10" column-count="6" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
     <margin top="0" left="0" bottom="0" right="0"/>
     <constraints>
-      <xy x="20" y="20" width="794" height="400"/>
+      <xy x="20" y="20" width="907" height="745"/>
     </constraints>
-    <properties/>
+    <properties>
+      <background color="-4473925"/>
+      <font name="Calibri" size="16" style="2"/>
+      <foreground color="-2416086"/>
+    </properties>
     <border type="none"/>
     <children>
       <hspacer id="3ca2">
@@ -20,7 +24,7 @@
       </hspacer>
       <vspacer id="14e0d">
         <constraints>
-          <grid row="1" column="5" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+          <grid row="2" column="5" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
         </constraints>
       </vspacer>
       <hspacer id="2e2e">
@@ -28,67 +32,328 @@
           <grid row="0" column="4" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
       </hspacer>
-      <vspacer id="c0c73">
+      <component id="635ba" class="javax.swing.JButton" binding="agregarProdcutosBTN">
         <constraints>
-          <grid row="2" column="5" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
-        </constraints>
-      </vspacer>
-      <component id="5619c" class="javax.swing.JButton" binding="agregarUsuariosButton" default-binding="true">
-        <constraints>
-          <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <grid row="6" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <text value="Agregar usuarios"/>
+          <background color="-75337"/>
+          <font name="Calibri" size="16" style="2"/>
+          <foreground color="-2416086"/>
+          <text value="Agregar Productos"/>
         </properties>
       </component>
-      <component id="fc77c" class="javax.swing.JButton" binding="editarUsuariosButton" default-binding="true">
+      <component id="a27cd" class="javax.swing.JButton" binding="editarProdcutosBTN">
         <constraints>
-          <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="1" use-parent-layout="false"/>
+          <grid row="6" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <text value="Editar usuarios"/>
-        </properties>
-      </component>
-      <component id="756b3" class="javax.swing.JButton" binding="eliminarUsuariosButton" default-binding="true">
-        <constraints>
-          <grid row="2" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-        </constraints>
-        <properties>
-          <text value="Eliminar usuarios"/>
+          <background color="-75337"/>
+          <font name="Calibri" size="16" style="2"/>
+          <foreground color="-2416086"/>
+          <text value="Editar Productos"/>
         </properties>
       </component>
       <component id="6e7d9" class="javax.swing.JLabel">
         <constraints>
-          <grid row="1" column="0" row-span="1" col-span="3" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="1" column="1" row-span="1" col-span="3" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <text value="AQUI SE MUESTRASN LAS OPCIONES DE LOS ADMINISTRADORES "/>
+          <background color="-4473925"/>
+          <font name="Calibri" size="16" style="2"/>
+          <foreground color="-2416086"/>
+          <text value="PANEL DE ADMINISTRADOR"/>
         </properties>
       </component>
-      <component id="635ba" class="javax.swing.JButton" binding="verProductosButton" default-binding="true">
+      <component id="5619c" class="javax.swing.JButton" binding="agregarCajerosBTN">
         <constraints>
-          <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <text value="Ver productos"/>
+          <background color="-75337"/>
+          <font name="Calibri" size="16" style="2"/>
+          <foreground color="-2416086"/>
+          <text value="Agregar cajeros"/>
         </properties>
       </component>
-      <component id="61da6" class="javax.swing.JButton" binding="modificarProductosButton" default-binding="true">
+      <component id="756b3" class="javax.swing.JButton" binding="EliminarCajerosBTN">
         <constraints>
-          <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="2" use-parent-layout="false"/>
+          <grid row="2" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <text value="Modificar productos"/>
+          <background color="-75337"/>
+          <font name="Calibri" size="16" style="2"/>
+          <foreground color="-2416086"/>
+          <text value="Eliminar cajeros"/>
         </properties>
       </component>
-      <component id="a27cd" class="javax.swing.JButton" binding="eliminarProductosButton" default-binding="true">
+      <component id="61125" class="javax.swing.JButton" binding="buscarCajerosBTN">
         <constraints>
-          <grid row="3" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <text value="Eliminar productos"/>
+          <background color="-75337"/>
+          <font name="Calibri" size="16" style="2"/>
+          <foreground color="-2416086"/>
+          <text value="Buscar cajeros"/>
         </properties>
       </component>
+      <component id="d91c9" class="javax.swing.JTextField" binding="nombreCajeroTF">
+        <constraints>
+          <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+            <preferred-size width="150" height="-1"/>
+          </grid>
+        </constraints>
+        <properties>
+          <background color="-75337"/>
+        </properties>
+      </component>
+      <component id="55179" class="javax.swing.JTextField" binding="emailCajeroTF">
+        <constraints>
+          <grid row="4" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+            <preferred-size width="150" height="-1"/>
+          </grid>
+        </constraints>
+        <properties>
+          <background color="-75337"/>
+        </properties>
+      </component>
+      <component id="8f403" class="javax.swing.JTextField" binding="celularcajeroTF">
+        <constraints>
+          <grid row="4" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+            <preferred-size width="150" height="-1"/>
+          </grid>
+        </constraints>
+        <properties>
+          <background color="-75337"/>
+        </properties>
+      </component>
+      <component id="68ffb" class="javax.swing.JTextField" binding="direccionCajeroTf">
+        <constraints>
+          <grid row="4" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+            <preferred-size width="150" height="-1"/>
+          </grid>
+        </constraints>
+        <properties>
+          <background color="-75337"/>
+        </properties>
+      </component>
+      <component id="4b871" class="javax.swing.JButton" binding="eliminarProdcutosBTN">
+        <constraints>
+          <grid row="6" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <background color="-75337"/>
+          <font name="Calibri" size="16" style="2"/>
+          <foreground color="-2416086"/>
+          <text value="Eliminar Prodcutos"/>
+        </properties>
+      </component>
+      <component id="fc77c" class="javax.swing.JButton" binding="editarCajerosBTN">
+        <constraints>
+          <grid row="2" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="1" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <background color="-75337"/>
+          <font name="Calibri" size="16" style="2"/>
+          <foreground color="-2416086"/>
+          <text value="Editar cajeros"/>
+        </properties>
+      </component>
+      <component id="5ca7d" class="javax.swing.JTextField" binding="nombreProductoTF">
+        <constraints>
+          <grid row="8" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+            <preferred-size width="150" height="-1"/>
+          </grid>
+        </constraints>
+        <properties>
+          <background color="-75337"/>
+          <text value=""/>
+        </properties>
+      </component>
+      <component id="2494c" class="javax.swing.JTextField" binding="codigoProductoTF">
+        <constraints>
+          <grid row="8" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+            <preferred-size width="150" height="-1"/>
+          </grid>
+        </constraints>
+        <properties>
+          <background color="-75337"/>
+        </properties>
+      </component>
+      <component id="3811f" class="javax.swing.JTextField" binding="cantidadProdcutoTF">
+        <constraints>
+          <grid row="8" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+            <preferred-size width="150" height="-1"/>
+          </grid>
+        </constraints>
+        <properties>
+          <background color="-75337"/>
+        </properties>
+      </component>
+      <component id="ccf29" class="javax.swing.JTextField" binding="precioProdcutoTF">
+        <constraints>
+          <grid row="8" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+            <preferred-size width="150" height="-1"/>
+          </grid>
+        </constraints>
+        <properties>
+          <background color="-75337"/>
+        </properties>
+      </component>
+      <scrollpane id="dc29b">
+        <constraints>
+          <grid row="9" column="0" row-span="1" col-span="3" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties/>
+        <border type="none"/>
+        <children>
+          <component id="491ee" class="javax.swing.JTable" binding="tabla3">
+            <constraints/>
+            <properties/>
+          </component>
+        </children>
+      </scrollpane>
+      <component id="61da6" class="javax.swing.JButton" binding="actualizarProdcutosBTN">
+        <constraints>
+          <grid row="6" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="2" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <background color="-75337"/>
+          <font name="Calibri" size="16" style="2"/>
+          <foreground color="-2416086"/>
+          <text value="Buscar Productos"/>
+        </properties>
+      </component>
+      <component id="9ff23" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="7" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <background color="-4473925"/>
+          <font name="Calibri" size="16" style="2"/>
+          <foreground color="-2416086"/>
+          <text value="NOMBRE DEL PRODUCTO"/>
+        </properties>
+      </component>
+      <component id="de65a" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="7" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <background color="-4473925"/>
+          <font name="Calibri" size="16" style="2"/>
+          <foreground color="-2416086"/>
+          <text value="CODIGO DEL PRODUCTO"/>
+        </properties>
+      </component>
+      <component id="830df" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="7" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <background color="-4473925"/>
+          <font name="Calibri" size="16" style="2"/>
+          <foreground color="-2416086"/>
+          <text value="STOCK DEL PRODUCTO"/>
+        </properties>
+      </component>
+      <component id="3112b" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="7" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <background color="-4473925"/>
+          <font name="Calibri" size="16" style="2"/>
+          <foreground color="-2416086"/>
+          <text value="PRECIO DEL PRODUCTO"/>
+        </properties>
+      </component>
+      <component id="88e79" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <background color="-4473925"/>
+          <font name="Calibri" size="16" style="2"/>
+          <foreground color="-2416086"/>
+          <text value="NOMBRE DEL CAJERO"/>
+        </properties>
+      </component>
+      <component id="b9119" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <background color="-4473925"/>
+          <font name="Calibri" size="16" style="2"/>
+          <foreground color="-2416086"/>
+          <text value="EMAIL DEL CAJERO"/>
+        </properties>
+      </component>
+      <component id="a37fb" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="3" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="1" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <background color="-4473925"/>
+          <font name="Calibri" size="16" style="2"/>
+          <foreground color="-2416086"/>
+          <text value="CELULAR DEL CAJERO"/>
+        </properties>
+      </component>
+      <component id="b494f" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="3" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <background color="-4473925"/>
+          <font name="Calibri" size="16" style="2"/>
+          <foreground color="-2416086"/>
+          <text value="DIRECCION DEL CAJERO"/>
+        </properties>
+      </component>
+      <component id="ec6f7" class="javax.swing.JTextField" binding="passwordCajeroTF">
+        <constraints>
+          <grid row="4" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+            <preferred-size width="150" height="-1"/>
+          </grid>
+        </constraints>
+        <properties>
+          <background color="-75337"/>
+        </properties>
+      </component>
+      <component id="b1b65" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="3" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <background color="-4473925"/>
+          <font name="Calibri" size="16" style="2"/>
+          <foreground color="-2416086"/>
+          <text value="PASSWORD DEL CAJERO"/>
+        </properties>
+      </component>
+      <scrollpane id="7f91">
+        <constraints>
+          <grid row="5" column="0" row-span="1" col-span="3" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties/>
+        <border type="none"/>
+        <children>
+          <scrollpane id="c232d">
+            <constraints/>
+            <properties/>
+            <border type="none"/>
+            <children>
+              <component id="74b3d" class="javax.swing.JTable" binding="tabla1">
+                <constraints/>
+                <properties/>
+              </component>
+            </children>
+          </scrollpane>
+        </children>
+      </scrollpane>
     </children>
   </grid>
 </form>
